@@ -1,0 +1,71 @@
+<html ng-app="student">
+	<head>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	</head>
+	<body ng-controller="StudentController">
+		{{data[data.field]}}
+		<div class="container row">
+			<h1 class="pull-left">Students</h1>
+			<a class="btn btn-info pull-right" ng-click="newStudent()">New Student</a>
+			<br/>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<th>Sr. No.</th>
+						<th>Name</th>
+						<th>Age</th>
+						<th>Actions</th>
+					</tr>
+					<tr ng-repeat="student in students">
+						<td>{{$index + 1}}</td>
+						<td>{{student.name}}</td>
+						<td>{{student.age}}</td>
+						<td>
+							<a ng-click="editStudent(student)">Edit</a>
+							&nbsp;|&nbsp;
+							<a ng-click="deleteStudent(student)">Delete</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div ng-show="enterNew">
+				<form>
+					<div class="row"><div class="span1">Name</div><div class="span4"><input type="text" class="input" ng-model="student.name" /></div></div>
+					<div class="row"><div class="span1">Age</div><div class="span4"><input type="text" ng-model="student.age" /></div></div>
+					
+					<div class="row"><div class="span5">
+						<input type="submit" class="btn btn-primary" value="Save" ng-click="createStudent(student)"/>
+						<a class="btn" ng-click="cancelSave()">Cancel</a>
+					</div></div>
+				</form>
+			</div>
+			
+			<div ng-show="editing">
+				<form>
+					<div class="row">
+						<div class="span1">Name</div>
+						<div class="span4">
+							<input type="text" class="input" ng-model="student.name" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="span1">Age</div>
+						<div class="span4">
+							<input type="text" ng-model="student.age" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="span5">
+							<input type="submit" class="btn btn-primary" value="Save" ng-click="updateStudent()"/>
+							<a class="btn" ng-click="cancelSave()">Cancel</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
